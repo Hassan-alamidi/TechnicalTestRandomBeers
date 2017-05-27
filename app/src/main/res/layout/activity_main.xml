@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.hassan.technicaltestrandombeers.MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/friends_enjoying_beer"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/custom_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/page_shading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/mainContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/beerTitleLbl"
+                android:layout_width="368dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:text="@string/instruction_message"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Please press the Icon below to get a random beer" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                tools:layout_editor_absoluteX="11dp">
+
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingBottom="40dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="20dp">
+
+                    <ImageButton
+                        android:id="@+id/beerLabelBtn"
+                        android:layout_width="300dp"
+                        android:layout_height="250dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/beer_icon"
+                        android:contentDescription="@string/image_button_description" />
+
+                    <TextView
+                        android:id="@+id/beerDescriptionLbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sagittis libero at urna porttitor, vehicula sodales urna laoreet. Suspendisse nec euismod libero. Vestibulum ut vulputate ex, ut consequat est. Aenean ullamcorper arcu arcu, ut dictum sapien tristique eget. Integer a lacus porta, aliquet dui sed, lobortis ante. Integer rhoncus purus dui, eget condimentum tellus volutpat in. Maecenas rutrum ligula egestas sem porttitor accumsan. Sed tempus velit non mi faucibus sollicitudin. Quisque id volutpat ante. Proin rhoncus sagittis dolor, quis egestas nisl. Phasellus justo libero, pellentesque at facilisis vel, varius id odio."
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TechnicalTestRandomBeers</string>
+    <string name="instruction_message">Please press the Icon to get a random beer</string>
+    <string name="image_button_description">This button requests a new random beer</string>
+    <string name="shadowDescription">this_adds_a_shadow_to_the_toolbar</string>
+    <string name="shadeDescription">this_tints_the_page</string>
+    <string name="toolbar_headding">Get a random Beer</string>
+</resources>
