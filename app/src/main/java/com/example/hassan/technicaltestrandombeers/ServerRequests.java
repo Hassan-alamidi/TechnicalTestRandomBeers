@@ -3,20 +3,11 @@ package com.example.hassan.technicaltestrandombeers;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.Log;
-
-import com.google.gson.Gson;
-
-import java.net.InetAddress;
-import java.net.Proxy;
-import java.util.logging.Logger;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.util.Log.getStackTraceString;
 
 /**
  * Created by hassan on 23/05/2017.
@@ -27,10 +18,13 @@ public class ServerRequests {
     private static ServerRequests Instance;
     private ActivityCallback callback;
     private static final String key ="f732ee5e807f63b6f5ba16a2bedef20d";
+    private static boolean isOnline = false;
 
     public void RequestBeer(Context context, final ActivityCallback callback){
 
-            if(checkInternet(context)) {
+            if(isOnline || checkInternet(context)) {
+                isOnline = true;
+                //create a retrofit builder, enter the baseUrl and convert the Json object retrieved from the server to a POJO
                 Retrofit.Builder rtBuilder = new Retrofit.Builder().baseUrl("http://api.brewerydb.com/v2/").addConverterFactory(GsonConverterFactory.create());
                 Retrofit retro = rtBuilder.build();
                 RequestInterface beer = retro.create(RequestInterface.class);
@@ -40,7 +34,9 @@ public class ServerRequests {
                     @Override
                     public void onResponse(Call<Beer> call, Response<Beer> response) {
                         if (response.code() == 200) {
+                            //get the object from the response and store it in randomBeer
                             Beer randomBeer = response.body();
+                            //return randomBeer to the main activity
                             callback.onResponse(randomBeer);
                         } else {
                             Log.e("ServerRequest, Line 39", "Something went wrong, Error code: " + response.code());
@@ -54,17 +50,23 @@ public class ServerRequests {
                         if (t.getCause() != null) {
                             Log.e("The Cause of error:", t.getCause().toString());
                         }
+                        isOnline = false;
                         callback.OnFailure("Request Failure");
 
                     }
                 });
             }else{
-                callback.OnFailure("No Internet Connection");
+                isOnline = false;
+                //user is not connected to a network
+                callback.OnFailure("No Network Connection");
             }
 
     }
 
     public boolean checkInternet(Context context){
+        Log.e("Test Connection", "check");
+        //this method will check if the mobile is connected to a network,
+        // unfortunately it will not check if user has access to the internet as I do not have my own server to ping inorder to check and ping another companies server like google can get you blacklisted so for now this will have to do
         ConnectivityManager connectionManager = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
         return connectionManager.getActiveNetworkInfo() != null && connectionManager.getActiveNetworkInfo().isConnectedOrConnecting();
     }

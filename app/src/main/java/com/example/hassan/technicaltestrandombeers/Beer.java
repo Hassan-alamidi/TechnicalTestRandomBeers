@@ -1,7 +1,5 @@
 package com.example.hassan.technicaltestrandombeers;
 
-import android.util.Base64;
-
 import java.util.Map;
 
 /**
